@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTP Tax &amp; Consulting Services (Pty) Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16233F;
+    --navy-deep: #0E1729;
+    --gold: #B8892B;
+    --gold-bright: #D4A94A;
+    --cream: #F6F2E9;
+    --paper: #FBF9F4;
+    --ink: #23241F;
+    --ink-soft: #5B5C54;
+    --line: rgba(22,35,63,0.14);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px clamp(20px,5vw,64px);
+    background:rgba(251,249,244,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:38px;height:38px;
+    border:1.5px solid var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--navy);
+    flex-shrink:0;
+  }
+  .brand-text{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    line-height:1.15;
+    color:var(--navy);
+  }
+  .brand-text span{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:clamp(18px,3vw,36px);
+    margin:0;padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:0.03em;
+    color:var(--ink);
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1.5px;
+    background:var(--gold);
+    transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
+  @media (max-width:760px){
+    nav{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:170px clamp(20px,5vw,64px) 100px;
+    background:var(--navy);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(212,169,74,0.05) 0px, rgba(212,169,74,0.05) 1px, transparent 1px, transparent 84px),
+      repeating-linear-gradient(90deg, rgba(212,169,74,0.05) 0px, rgba(212,169,74,0.05) 1px, transparent 1px, transparent 84px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin-bottom:28px;
+    opacity:0;
+    animation:riseIn .7s ease forwards;
+  }
+  .eyebrow::before{
+    content:'';
+    width:26px;height:1px;
+    background:var(--gold-bright);
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 74px);
+    line-height:1.05;
+    margin:0 0 28px;
+    max-width:920px;
+    color:#fff;
+    opacity:0;
+    animation:riseIn .8s ease .12s forwards;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+  }
+  .hero p.lede{
+    font-size:clamp(15px,1.6vw,19px);
+    line-height:1.65;
+    color:rgba(246,242,233,0.78);
+    max-width:560px;
+    margin:0 0 44px;
+    opacity:0;
+    animation:riseIn .8s ease .24s forwards;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:riseIn .8s ease .36s forwards;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--gold-bright);
+    color:var(--navy-deep);
+  }
+  .btn-primary:hover{background:#e6bd5c;}
+  .btn-ghost{
+    border-color:rgba(246,242,233,0.35);
+    color:var(--cream);
+  }
+  .btn-ghost:hover{border-color:var(--gold-bright); color:var(--gold-bright);}
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .hero-strip{
+    position:relative;
+    margin-top:72px;
+    padding-top:32px;
+    border-top:1px solid rgba(246,242,233,0.16);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:24px;
+    max-width:920px;
+  }
+  .hero-strip div{font-size:12.5px; color:rgba(246,242,233,0.6); line-height:1.5;}
+  .hero-strip strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    color:var(--cream);
+    font-weight:600;
+    margin-bottom:4px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:104px clamp(20px,5vw,64px);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(28px,3.2vw,42px);
+    margin:0;
+    max-width:600px;
+    line-height:1.1;
+  }
+  .section-head p{
+    max-width:360px;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.6;
+    margin:0;
+  }
+
+  /* ---------- About ---------- */
+  .about{
+    background:var(--cream);
+    max-width:none;
+    padding:104px clamp(20px,5vw,64px);
+  }
+  .about-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:start;
+  }
+  @media (max-width:860px){
+    .about-inner{grid-template-columns:1fr;}
+  }
+  .about-inner p{
+    font-size:16px;
+    line-height:1.8;
+    color:var(--ink);
+    margin:0 0 18px;
+  }
+  .about-inner p:last-child{margin-bottom:0;}
+  .legal-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:32px;
+  }
+  .legal-card h3{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+  }
+  .legal-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .legal-row:last-child{border-bottom:none;}
+  .legal-row .k{color:var(--ink-soft);}
+  .legal-row .v{font-family:'IBM Plex Mono',monospace; text-align:right; color:var(--navy); font-weight:500;}
+
+  /* ---------- Services ---------- */
+  .services-list{
+    border-top:1px solid var(--line);
+  }
+  .service-row{
+    display:grid;
+    grid-template-columns:64px 1fr 1fr;
+    gap:28px;
+    align-items:center;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+    transition:background .2s ease;
+  }
+  .service-row:hover{background:rgba(184,137,43,0.05);}
+  .service-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--gold);
+  }
+  .service-row h3{
+    font-size:19px;
+    margin:0;
+    font-weight:600;
+  }
+  .service-row p{
+    margin:0;
+    font-size:14px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  @media (max-width:700px){
+    .service-row{grid-template-columns:36px 1fr; row-gap:6px;}
+    .service-row p{grid-column:2/3;}
+  }
+
+  /* ---------- Credentials / certificate ---------- */
+  .credentials{
+    background:var(--navy);
+    color:var(--cream);
+    max-width:none;
+    padding:104px clamp(20px,5vw,64px);
+    position:relative;
+  }
+  .cred-inner{
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .certificate{
+    margin-top:56px;
+    border:1px solid rgba(212,169,74,0.4);
+    padding:clamp(28px,5vw,56px);
+    position:relative;
+  }
+  .certificate::before,
+  .certificate::after{
+    content:'';
+    position:absolute;
+    width:18px;height:18px;
+    border:1.5px solid var(--gold-bright);
+  }
+  .certificate::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .certificate::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+  .cert-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:20px;
+    padding-bottom:32px;
+    margin-bottom:32px;
+    border-bottom:1px dashed rgba(246,242,233,0.25);
+  }
+  .cert-top .cert-title{
+    font-family:'Fraunces',serif;
+    font-size:22px;
+    font-weight:600;
+  }
+  .cert-top .cert-sub{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    color:rgba(246,242,233,0.55);
+    margin-top:6px;
+  }
+  .cert-seal{
+    width:64px;height:64px;
+    border:1.5px solid var(--gold-bright);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-align:center;
+    color:var(--gold-bright);
+    flex-shrink:0;
+  }
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:32px;
+  }
+  .cert-item .cert-k{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:rgba(246,242,233,0.55);
+    margin-bottom:8px;
+  }
+  .cert-item .cert-v{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:19px;
+    color:var(--gold-bright);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+  }
+  @media (max-width:860px){
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  .contact-copy h2{font-size:clamp(28px,3.2vw,42px); margin:0 0 20px; line-height:1.1;}
+  .contact-copy p{color:var(--ink-soft); font-size:15.5px; line-height:1.7; max-width:440px; margin:0 0 32px;}
+  .contact-fact{
+    display:flex;
+    gap:14px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .contact-fact:last-of-type{border-bottom:1px solid var(--line);}
+  .contact-fact .label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--gold);
+    width:110px;
+    flex-shrink:0;
+    padding-top:2px;
+  }
+  form{
+    background:var(--cream);
+    padding:36px;
+    border:1px solid var(--line);
+  }
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .field input, .field textarea, .field select{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    border-radius:var(--radius);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    border-color:var(--gold);
+  }
+  .field textarea{resize:vertical; min-height:96px;}
+  form .btn{width:100%; justify-content:center; margin-top:4px;}
+  .form-note{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    text-align:center;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:rgba(246,242,233,0.55);
+    padding:48px clamp(20px,5vw,64px) 32px;
+  }
+  .footer-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:12.5px;
+    padding-bottom:24px;
+    border-bottom:1px solid rgba(246,242,233,0.1);
+  }
+  .footer-inner .f-brand{
+    font-family:'Fraunces',serif;
+    color:var(--cream);
+    font-size:15px;
+    font-weight:600;
+  }
+  .footer-bottom{
+    max-width:1180px;
+    margin:20px auto 0;
+    font-size:11.5px;
+    letter-spacing:0.02em;
+    text-align:center;
+  }
+
+  ::selection{background:var(--gold-bright); color:var(--navy-deep);}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#top" class="brand">
+    <div class="brand-mark">BTP</div>
+    <div class="brand-text">BTP Tax &amp; Consulting<span>Services (Pty) Ltd</span></div>
+  </a>
+  <nav>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="top"></div>
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Sedibeng District &middot; Vaal Area &middot; South Africa</span>
+    <h1>Your business.<br><em>Our expertise.</em></h1>
+    <p class="lede">BTP Tax &amp; Consulting Services (Pty) Ltd is a full-service accounting and business consultancy proudly serving the Vaal area of Sedibeng District &mdash; from tax compliance to company registration and everything a growing business needs in between.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#services" class="btn btn-ghost">View services</a>
+    </div>
+    <div class="hero-strip">
+      <div><strong>10</strong>Service lines under one roof</div>
+      <div><strong>2012</strong>Registered &amp; operating in South Africa</div>
+      <div><strong>CIDB &amp; CSD</strong>Registered for public &amp; private sector work</div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <span class="section-label">About the company</span>
+      <h2 style="font-size:clamp(26px,3vw,36px); margin:0 0 24px; line-height:1.15;">A local firm built for how business actually gets done in the Vaal.</h2>
+      <p>Registered as Bothlabatsatsi Trading and Projects and trading as BTP Tax &amp; Consulting Services (Pty) Ltd, the firm brings together tax, financial, HR, and technology expertise that businesses in Sedibeng District usually have to source from several different providers.</p>
+      <p>Whether you're formalising a new venture, catching up on VAT compliance, or building out a supply chain, the goal is the same: give your business the back-office strength of a large consultancy with the responsiveness of a local team that knows the area.</p>
+    </div>
+    <div class="legal-card">
+      <h3>Registered entity</h3>
+      <div class="legal-row"><span class="k">Company name</span><span class="v">Bothlabatsatsi Trading and Projects</span></div>
+      <div class="legal-row"><span class="k">Trading as</span><span class="v">BTP Tax &amp; Consulting Services (Pty) Ltd</span></div>
+      <div class="legal-row"><span class="k">Jurisdiction</span><span class="v">South Africa</span></div>
+      <div class="legal-row"><span class="k">Service area</span><span class="v">Vaal &middot; Sedibeng District</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-head">
+    <div>
+      <span class="section-label">What we do</span>
+      <h2>Ten disciplines, one point of contact.</h2>
+    </div>
+    <p>From the numbers to the people to the systems that run your business &mdash; each line below is a service BTP delivers directly.</p>
+  </div>
+  <div class="services-list">
+    <div class="service-row">
+      <span class="service-num">01</span>
+      <h3>Financial Statements</h3>
+      <p>Accurate, reliable, compliant reporting you can put in front of a bank, SARS, or an investor.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">02</span>
+      <h3>Tax Returns</h3>
+      <p>Tax compliance made simple &mdash; individual and corporate returns handled end to end.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">03</span>
+      <h3>VAT Returns</h3>
+      <p>Stay compliant and avoid penalties with VAT filed correctly and on time, every period.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">04</span>
+      <h3>Human Resources</h3>
+      <p>People are your greatest asset &mdash; HR support that keeps your team compliant and supported.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">05</span>
+      <h3>Supply Chain Management</h3>
+      <p>Efficient processes, better results, from procurement through to delivery.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">06</span>
+      <h3>Training</h3>
+      <p>Empowering people, building skills across your business through targeted training.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">07</span>
+      <h3>Business Plans</h3>
+      <p>Turning ideas into sustainable businesses with plans built to raise funding and guide growth.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">08</span>
+      <h3>Company Registration</h3>
+      <p>We make it official &mdash; so you can focus on growth from day one.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">09</span>
+      <h3>Marketing</h3>
+      <p>Grow your brand and reach more customers with practical, results-focused marketing.</p>
+    </div>
+    <div class="service-row">
+      <span class="service-num">10</span>
+      <h3>Technology Services</h3>
+      <p>Smart solutions, better productivity &mdash; the systems your business runs on.</p>
+    </div>
+  </div>
+</section>
+
+<section class="credentials" id="credentials">
+  <div class="cred-inner">
+    <span class="section-label" style="color:var(--gold-bright);">Registration &amp; compliance</span>
+    <h2 style="margin:0; color:#fff; font-size:clamp(28px,3.2vw,42px); max-width:600px; line-height:1.1;">Registered, verified, and ready to be procured.</h2>
+    <div class="certificate">
+      <div class="cert-top">
+        <div>
+          <div class="cert-title">Certificate of Registration</div>
+          <div class="cert-sub">BOTHLABATSATSI TRADING AND PROJECTS &nbsp;/&nbsp; T/A BTP TAX &amp; CONSULTING SERVICES (PTY) LTD</div>
+        </div>
+        <div class="cert-seal">OFFICIAL<br>RECORD</div>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-item">
+          <div class="cert-k">Company registration no.</div>
+          <div class="cert-v">2012/010244/07</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-k">Company tax registration no.</div>
+          <div class="cert-v">9456983163</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-k">CSD registration no.</div>
+          <div class="cert-v">MAAA0016946</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-k">CIDB registration no.</div>
+          <div class="cert-v">10132543</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-copy">
+      <span class="section-label">Get in touch</span>
+      <h2>Let's talk about your business.</h2>
+      <p>Tell us a little about what you need &mdash; tax, HR, registration, or something else on the list &mdash; and the team will follow up.</p>
+      <div class="contact-fact"><span class="label">Location</span><span>Vaal Area, Sedibeng District, South Africa</span></div>
+      <div class="contact-fact"><span class="label">Reg. No.</span><span class="mono">2012/010244/07</span></div>
+    </div>
+    <form id="contactForm">
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="service">Service you're interested in</label>
+        <select id="service" name="service">
+          <option>Financial Statements</option>
+          <option>Tax Returns</option>
+          <option>VAT Returns</option>
+          <option>Human Resources</option>
+          <option>Supply Chain Management</option>
+          <option>Training</option>
+          <option>Business Plans</option>
+          <option>Company Registration</option>
+          <option>Marketing</option>
+          <option>Technology Services</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us what you need..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send message</button>
+      <div class="form-note">We'll get back to you as soon as possible.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="f-brand">BTP Tax &amp; Consulting Services (Pty) Ltd</div>
+    <div>Vaal Area &middot; Sedibeng District &middot; South Africa</div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 BTP Tax &amp; Consulting Services (Pty) Ltd. Trading name of Bothlabatsatsi Trading and Projects. Reg. 2012/010244/07.</div>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = 'Message sent';
+    btn.style.background = '#e6bd5c';
+    setTimeout(()=>{ btn.textContent = original; }, 2600);
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
