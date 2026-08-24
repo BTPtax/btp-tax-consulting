@@ -109,6 +109,7 @@ Edit text directly in HTML sections:
 **Location**: Vaal Area, Sedibeng District, South Africa  
 **Reg. No.**: 2012/010244/07  
 **Trading As**: Bothlabatsatsi Trading and Projects
+**Email address : happythwala17@gmail.com 
 
 ---
 
