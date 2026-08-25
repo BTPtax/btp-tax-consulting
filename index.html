@@ -567,7 +567,7 @@
   <div class="hero-inner">
     <span class="eyebrow">Sedibeng District &middot; Vaal Area &middot; South Africa</span>
     <h1>Your business.<br><em>Our expertise.</em></h1>
-    <p class="lede">BTP Tax &amp; Consulting Services (Pty) Ltd is a full-service accounting and business consultancy proudly serving the Vaal area of Sedibeng District &mdash; from tax compliance to company registration and everything a growing business needs in between.</p>
+    <p class="lede">BTP Tax &amp; Consulting Services (Pty) Ltd is a full-service accounting and business consultancy proudly serving the Vaal area of Sedibeng District &mdash; from tax compliance to HR, supply chain, and technology solutions.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn btn-primary">Get in touch</a>
       <a href="#services" class="btn btn-ghost">View services</a>
@@ -585,8 +585,8 @@
     <div>
       <span class="section-label">About the company</span>
       <h2 style="font-size:clamp(26px,3vw,36px); margin:0 0 24px; line-height:1.15;">A local firm built for how business actually gets done in the Vaal.</h2>
-      <p>Registered as Bothlabatsatsi Trading and Projects and trading as BTP Tax &amp; Consulting Services (Pty) Ltd, the firm brings together tax, financial, HR, and technology expertise that businesses in Sedibeng District usually have to source from several different providers.</p>
-      <p>Whether you're formalising a new venture, catching up on VAT compliance, or building out a supply chain, the goal is the same: give your business the back-office strength of a large consultancy with the responsiveness of a local team that knows the area.</p>
+      <p>Registered as Bothlabatsatsi Trading and Projects and trading as BTP Tax &amp; Consulting Services (Pty) Ltd, the firm brings together tax, financial, HR, and technology expertise that businesses in the region rely on.</p>
+      <p>Whether you're formalising a new venture, catching up on VAT compliance, or building out a supply chain, the goal is the same: give your business the back-office strength of a large consulting firm without the overhead.</p>
     </div>
     <div class="legal-card">
       <h3>Registered entity</h3>
@@ -748,12 +748,44 @@
 <script>
   document.getElementById('contactForm').addEventListener('submit', function(e){
     e.preventDefault();
+    
+    const formData = new FormData(this);
     const btn = this.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    btn.textContent = 'Message sent';
-    btn.style.background = '#e6bd5c';
-    setTimeout(()=>{ btn.textContent = original; }, 2600);
-    this.reset();
+    
+    // Disable button to prevent double submission
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    
+    fetch('https://formspree.io/f/xeajbrbq', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        btn.textContent = 'Message sent ✓';
+        btn.style.background = '#e6bd5c';
+        this.reset();
+        setTimeout(() => { 
+          btn.textContent = original;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 2600);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      btn.textContent = 'Error sending message';
+      btn.style.background = '#d9534f';
+      console.error('Form error:', error);
+      setTimeout(() => { 
+        btn.textContent = original;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2600);
+    });
   });
 </script>
 
